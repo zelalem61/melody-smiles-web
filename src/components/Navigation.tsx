@@ -1,20 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
+    { name: "Appointment", href: "/appointment" },
     { name: "Contact", href: "#contact" },
   ];
 
-  const scrollToSection = (href: string) => {
+  const handleNavClick = (href: string) => {
     setIsOpen(false);
+    if (href.startsWith("#")) {
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => scrollToSection(href), 100);
+      } else {
+        scrollToSection(href);
+      }
+    } else {
+      navigate(href);
+    }
+  };
+
+  const scrollToSection = (href: string) => {
     if (href === "#home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -29,7 +46,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <button 
-            onClick={() => scrollToSection("#home")}
+            onClick={() => handleNavClick("#home")}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
             <img src={logo} alt="Melody Special Dental Clinic" className="h-12" />
@@ -43,7 +60,7 @@ const Navigation = () => {
             {navLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={() => scrollToSection(link.href)}
+                onClick={() => handleNavClick(link.href)}
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
                 {link.name}
@@ -51,7 +68,7 @@ const Navigation = () => {
             ))}
             <Button 
               variant="hero"
-              onClick={() => scrollToSection("#contact")}
+              onClick={() => handleNavClick("/appointment")}
             >
               Book Now
             </Button>
@@ -74,7 +91,7 @@ const Navigation = () => {
               {navLinks.map((link) => (
                 <button
                   key={link.name}
-                  onClick={() => scrollToSection(link.href)}
+                  onClick={() => handleNavClick(link.href)}
                   className="text-foreground hover:text-primary transition-colors font-medium text-left px-4 py-2"
                 >
                   {link.name}
@@ -84,7 +101,7 @@ const Navigation = () => {
                 <Button 
                   variant="hero"
                   className="w-full"
-                  onClick={() => scrollToSection("#contact")}
+                  onClick={() => handleNavClick("/appointment")}
                 >
                   Book Now
                 </Button>
