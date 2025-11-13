@@ -1,22 +1,16 @@
-# Welcome to your Lovable project
+# Melody Special Dental Clinic Website
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/b918316a-889f-46c1-81db-3a99aad6b693
+This is the official website for Melody Special Dental Clinic, providing expert dental care in Addis Ababa.
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/b918316a-889f-46c1-81db-3a99aad6b693) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+There are several ways of editing this application.
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -27,7 +21,7 @@ Follow these steps:
 git clone <YOUR_GIT_URL>
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd melody-smiles-web
 
 # Step 3: Install the necessary dependencies.
 npm i
@@ -60,14 +54,3 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/b918316a-889f-46c1-81db-3a99aad6b693) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
