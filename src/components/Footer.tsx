@@ -1,5 +1,5 @@
-import { Phone, Mail, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -71,8 +71,8 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
-                  <a href="mailto:zelalemhab19@gmail.com" className="text-background/80 hover:text-background transition-colors block">
-                    zelalemhab19@gmail.com
+                  <a href="mailto:Melodydental4kilo@gmail.com" className="text-background/80 hover:text-background transition-colors block">
+                    Melodydental4kilo@gmail.com
                   </a>
                 </div>
               </li>

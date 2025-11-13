@@ -1,8 +1,8 @@
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -15,10 +15,16 @@ const Contact = () => {
   });
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send the form data to a backend
-    toast.success("Thank you! We'll contact you soon.");
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    // Client-side validation before Web3Forms submission
+    if (!formData.name || !formData.email || !formData.message) {
+      e.preventDefault();
+      toast.error("Please fill in all required fields");
+      return;
+    }
+    
+    // Form will submit to Web3Forms automatically
+    // We don't reset the form as the page will redirect
+    toast.success("Submitting your message...");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -69,8 +75,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-2">Email</h4>
-                    <a href="mailto:zelalemhab19@gmail.com" className="text-muted-foreground hover:text-primary transition-colors block">
-                      zelalemhab19@gmail.com
+                    <a href="mailto:Melodydental4kilo@gmail.com" className="text-muted-foreground hover:text-primary transition-colors block">
+                    Melodydental4kilo@gmail.com
                     </a>
                   </div>
                 </div>
@@ -98,12 +104,12 @@ const Contact = () => {
                     asChild
                   >
                     <a 
-                      href="https://t.me/melodydental" 
+                      href="https://t.me/Melodydent" 
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Send className="mr-2" />
-                      Contact us on Telegram
+                      Join our Telegram Community
                     </a>
                   </Button>
                 </div>
@@ -129,7 +135,11 @@ const Contact = () => {
           <Card className="p-8 border-none shadow-[var(--shadow-soft)] bg-card/50 backdrop-blur-sm">
             <h3 className="text-2xl font-semibold text-foreground mb-6">Send us a Message</h3>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6" onSubmit={handleSubmit}>
+              <input type="hidden" name="access_key" value="5aa7972c-57b1-469f-9690-6746e2bed6c3" />
+              <input type="hidden" name="from_name" value="Melody Dental Clinic" />
+              <input type="hidden" name="subject" value="New Contact Form Submission" />
+              <input type="hidden" name="redirect" value="https://web3forms.com/success" />
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                   Name *

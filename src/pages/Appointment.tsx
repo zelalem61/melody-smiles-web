@@ -1,11 +1,14 @@
-import { useState } from "react";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -13,15 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar as CalendarIcon, Clock } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon, Clock } from "lucide-react";
+import { useState } from "react";
 
 const Appointment = () => {
   const [date, setDate] = useState<Date>();
@@ -52,33 +52,18 @@ const Appointment = () => {
     "04:00 PM",
   ];
 
+  // This is now handled by web3forms
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
+    // This function is no longer used as form submission is handled directly by web3forms
+    // But we keep it for potential future client-side validation if needed
     if (!date || !formData.fullName || !formData.phone || !formData.email || !formData.time || !formData.service) {
+      e.preventDefault();
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
         variant: "destructive",
       });
-      return;
     }
-
-    toast({
-      title: "Thank you for booking!",
-      description: "Our team will contact you soon to confirm your appointment.",
-    });
-
-    // Reset form
-    setFormData({
-      fullName: "",
-      phone: "",
-      email: "",
-      time: "",
-      service: "",
-      message: "",
-    });
-    setDate(undefined);
   };
 
   return (
@@ -97,11 +82,16 @@ const Appointment = () => {
             </div>
 
             <div className="bg-card rounded-lg shadow-lg p-6 md:p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6" onSubmit={handleSubmit}>
+                <input type="hidden" name="access_key" value="5aa7972c-57b1-469f-9690-6746e2bed6c3" />
+                <input type="hidden" name="from_name" value="Melody Dental Clinic" />
+                <input type="hidden" name="subject" value="New Appointment Request" />
+                <input type="hidden" name="redirect" value="https://web3forms.com/success" />
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Full Name *</Label>
                   <Input
                     id="fullName"
+                    name="fullName"
                     value={formData.fullName}
                     onChange={(e) =>
                       setFormData({ ...formData, fullName: e.target.value })
@@ -116,6 +106,7 @@ const Appointment = () => {
                     <Label htmlFor="phone">Phone Number *</Label>
                     <Input
                       id="phone"
+                      name="phone"
                       type="tel"
                       value={formData.phone}
                       onChange={(e) =>
@@ -130,6 +121,7 @@ const Appointment = () => {
                     <Label htmlFor="email">Email Address *</Label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       value={formData.email}
                       onChange={(e) =>
@@ -147,6 +139,7 @@ const Appointment = () => {
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
+                          type="button"
                           variant="outline"
                           className={cn(
                             "w-full justify-start text-left font-normal",
@@ -170,10 +163,18 @@ const Appointment = () => {
                         />
                       </PopoverContent>
                     </Popover>
+                    {date && (
+                      <input 
+                        type="hidden" 
+                        name="date" 
+                        value={format(date, "yyyy-MM-dd")} 
+                      />
+                    )}
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="time">Preferred Time *</Label>
+                    <input type="hidden" name="time" value={formData.time} />
                     <Select
                       value={formData.time}
                       onValueChange={(value) =>
@@ -206,6 +207,7 @@ const Appointment = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="service">Select Service *</Label>
+                  <input type="hidden" name="service" value={formData.service} />
                   <Select
                     value={formData.service}
                     onValueChange={(value) =>
@@ -229,6 +231,7 @@ const Appointment = () => {
                   <Label htmlFor="message">Message or Note (Optional)</Label>
                   <Textarea
                     id="message"
+                    name="message"
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
