@@ -5,26 +5,55 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { API_URL } from "@/lib/api-config";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    message: ""
+    message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    // Client-side validation before Web3Forms submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!formData.name || !formData.email || !formData.message) {
-      e.preventDefault();
       toast.error("Please fill in all required fields");
       return;
     }
-    
-    // Form will submit to Web3Forms automatically
-    // We don't reset the form as the page will redirect
-    toast.success("Submitting your message...");
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "contact",
+          ...formData,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send");
+      }
+
+      toast.success("Message sent successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Unable to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -135,11 +164,7 @@ const Contact = () => {
           <Card className="p-8 border-none shadow-[var(--shadow-soft)] bg-card/50 backdrop-blur-sm">
             <h3 className="text-2xl font-semibold text-foreground mb-6">Send us a Message</h3>
             
-            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6" onSubmit={handleSubmit}>
-              <input type="hidden" name="access_key" value="5aa7972c-57b1-469f-9690-6746e2bed6c3" />
-              <input type="hidden" name="from_name" value="Melody Dental Clinic" />
-              <input type="hidden" name="subject" value="New Contact Form Submission" />
-              <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                   Name *
@@ -198,9 +223,9 @@ const Contact = () => {
                 />
               </div>
               
-              <Button type="submit" className="w-full" size="lg">
+              <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
                 <Send className="mr-2" />
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Card>

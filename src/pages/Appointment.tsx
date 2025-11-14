@@ -19,6 +19,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { API_URL } from "@/lib/api-config";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";
 import { useState } from "react";
@@ -33,6 +34,7 @@ const Appointment = () => {
     service: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const services = [
@@ -52,17 +54,71 @@ const Appointment = () => {
     "04:00 PM",
   ];
 
-  // This is now handled by web3forms
-  const handleSubmit = (e: React.FormEvent) => {
-    // This function is no longer used as form submission is handled directly by web3forms
-    // But we keep it for potential future client-side validation if needed
-    if (!date || !formData.fullName || !formData.phone || !formData.email || !formData.time || !formData.service) {
-      e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (
+      !date ||
+      !formData.fullName ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.time ||
+      !formData.service
+    ) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
         variant: "destructive",
       });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "appointment",
+          fullName: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          date: format(date, "yyyy-MM-dd"),
+          time: formData.time,
+          service: formData.service,
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send");
+      }
+
+      toast({
+        title: "Appointment Requested",
+        description: "We will contact you shortly to confirm.",
+      });
+
+      setFormData({
+        fullName: "",
+        phone: "",
+        email: "",
+        time: "",
+        service: "",
+        message: "",
+      });
+      setDate(undefined);
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Submission Failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -82,11 +138,7 @@ const Appointment = () => {
             </div>
 
             <div className="bg-card rounded-lg shadow-lg p-6 md:p-8">
-              <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6" onSubmit={handleSubmit}>
-                <input type="hidden" name="access_key" value="5aa7972c-57b1-469f-9690-6746e2bed6c3" />
-                <input type="hidden" name="from_name" value="Melody Dental Clinic" />
-                <input type="hidden" name="subject" value="New Appointment Request" />
-                <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Full Name *</Label>
                   <Input
@@ -174,7 +226,6 @@ const Appointment = () => {
 
                   <div className="space-y-2">
                     <Label htmlFor="time">Preferred Time *</Label>
-                    <input type="hidden" name="time" value={formData.time} />
                     <Select
                       value={formData.time}
                       onValueChange={(value) =>
@@ -207,7 +258,6 @@ const Appointment = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="service">Select Service *</Label>
-                  <input type="hidden" name="service" value={formData.service} />
                   <Select
                     value={formData.service}
                     onValueChange={(value) =>
@@ -245,8 +295,9 @@ const Appointment = () => {
                   type="submit"
                   className="w-full bg-primary hover:bg-primary-light text-primary-foreground"
                   size="lg"
+                  disabled={isSubmitting}
                 >
-                  Book Appointment
+                  {isSubmitting ? "Submitting..." : "Book Appointment"}
                 </Button>
               </form>
             </div>
