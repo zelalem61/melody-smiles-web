@@ -1,11 +1,7 @@
 // API configuration for different environments
 const getApiUrl = () => {
-  // In production (deployed), use the deployed URL
-  if (import.meta.env.PROD) {
-    return "https://melody-smiles-web.vercel.app/api";
-  }
-  
-  // In development, use localhost
+  // Use relative path for both dev and production (same domain)
+  // Vercel will handle the routing automatically
   return "/api";
 };
 
