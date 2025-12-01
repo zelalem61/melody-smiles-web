@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { API_URL } from "@/lib/api-config";
+import { Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { API_URL } from "@/lib/api-config";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -95,6 +95,26 @@ const Contact = () => {
                     <a href="tel:+251913089135" className="text-muted-foreground hover:text-primary transition-colors block">
                       +251 913 089 135
                     </a>
+                    <a href="tel:+251777060700" className="text-muted-foreground hover:text-primary transition-colors block">
+                      +251 777 060 700
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">WhatsApp</h4>
+                    <a 
+                      href="https://wa.me/251777060700" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors block"
+                    >
+                      +251 777 060 700
+                    </a>
                   </div>
                 </div>
                 
@@ -117,7 +137,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-foreground mb-2">Location</h4>
                     <a 
-                      href="https://maps.google.com/?q=4+Kilo+Addis+Ababa" 
+                      href="https://www.google.com/maps?q=9.035000,38.758778" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-primary transition-colors"
@@ -143,20 +163,6 @@ const Contact = () => {
                   </Button>
                 </div>
               </div>
-            </Card>
-            
-            {/* Map */}
-            <Card className="p-2 border-none shadow-[var(--shadow-soft)] overflow-hidden bg-card/50 backdrop-blur-sm">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.3193089!2d38.7577!3d9.0320!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDEnNTUuMiJOIDM4wrA0NScy3.7LjQiRQ!5e0!3m2!1sen!2set!4v1234567890"
-                width="100%"
-                height="300"
-                style={{ border: 0, borderRadius: '0.5rem' }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Melody Special Dental Clinic Location"
-              />
             </Card>
           </div>
           
@@ -229,6 +235,22 @@ const Contact = () => {
               </Button>
             </form>
           </Card>
+
+          {/* Map */}
+          <div className="lg:col-span-2">
+            <Card className="p-2 border-none shadow-[var(--shadow-soft)] overflow-hidden bg-card/50 backdrop-blur-sm">
+              <iframe
+                src="https://www.google.com/maps?q=9.035000,38.758778&z=17&output=embed"
+                width="100%"
+                height="300"
+                style={{ border: 0, borderRadius: '0.5rem' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Melody Special Dental Clinic Location"
+              />
+            </Card>
+          </div>
         </div>
       </div>
     </section>

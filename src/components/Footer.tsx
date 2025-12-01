@@ -66,6 +66,9 @@ const Footer = () => {
                   <a href="tel:+251913089135" className="text-background/80 hover:text-background transition-colors block">
                     +251 913 089 135
                   </a>
+                  <a href="tel:+251777060700" className="text-background/80 hover:text-background transition-colors block">
+                    +251 777 060 700
+                  </a>
                 </div>
               </li>
               <li className="flex items-start gap-2">
@@ -79,7 +82,7 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <a 
-                  href="https://maps.google.com/?q=4+Kilo+Addis+Ababa" 
+                  href="https://www.google.com/maps?q=9.035000,38.758778" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-background/80 hover:text-background transition-colors"

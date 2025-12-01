@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Phone, MapPin } from "lucide-react";
 import heroImage from "@/assets/hero-dental.jpg";
 import logo from "@/assets/logo.png";
+import { Button } from "@/components/ui/button";
+import { MapPin, Phone } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -36,7 +36,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-primary-foreground/95 mb-12 font-light drop-shadow-md">
-            Expert dental care with a personal touch in Addis Ababa
+          Expert dental care with Excellency
           </p>
           
           {/* CTA Buttons */}
@@ -76,6 +76,10 @@ const Hero = () => {
                   <a href="tel:+251913089135" className="text-muted-foreground hover:text-primary transition-colors">
                     +251 913 089 135
                   </a>
+                  <br />
+                  <a href="tel:+251777060700" className="text-muted-foreground hover:text-primary transition-colors">
+                    +251 777 060 700
+                  </a>
                 </div>
               </div>
               
@@ -84,12 +88,12 @@ const Hero = () => {
                 <div>
                   <p className="font-semibold text-foreground">Location</p>
                   <a 
-                    href="https://maps.google.com/?q=4+Kilo+Addis+Ababa" 
+                    href="https://www.google.com/maps?q=9.035000,38.758778" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    4 Kilo, Addis Ababa
+                    4 Kilo, near Arada subcity MHM Mall fifth floor
                   </a>
                 </div>
               </div>

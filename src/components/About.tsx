@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Heart, Award, Users } from "lucide-react";
+import { Award, Heart, Users } from "lucide-react";
 
 const About = () => {
   return (
@@ -24,15 +24,15 @@ const About = () => {
               </p>
               
               <p>
-                Her calm and friendly approach helps patients feel comfortable, while her precision ensures top-quality treatment in every procedure.
+                Her friendly approach helps patients feel comfortable, while her precision ensures top-quality treatment in every procedure.
               </p>
               
               <p>
-                Her vision for Melody Special Dental Clinic is to create a <span className="font-semibold text-primary">welcoming environment</span> where smiles are restored, confidence is renewed, and every visit feels positive.
+                Her vision is to create a <span className="font-semibold text-primary">welcoming environment</span> where smiles are restored, confidence is renewed, and every visit feels positive.
               </p>
               
               <p>
-                When not at the clinic, Dr. Tinsae finds joy in her faith, family, and continuous learning — values that inspire her gentle, professional care.
+                Beyond that, Dr. Tinsae finds joy in her faith, family, and continuous learning, values that inspire her gentle, professional care.
               </p>
             </div>
             
