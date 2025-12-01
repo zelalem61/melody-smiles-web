@@ -249,6 +249,21 @@ const Contact = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Melody Special Dental Clinic Location"
               />
+              <div className="p-4 pt-2">
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  asChild
+                >
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=9.035000,38.758778"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Get Directions
+                  </a>
+                </Button>
+              </div>
             </Card>
           </div>
         </div>
