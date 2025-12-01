@@ -5,9 +5,6 @@ export default {
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
-    screens: {
-      xs: "570px",
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -16,6 +13,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        xs: "570px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
