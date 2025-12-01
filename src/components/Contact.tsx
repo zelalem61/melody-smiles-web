@@ -242,14 +242,15 @@ const Contact = () => {
               <iframe
                 src="https://www.google.com/maps?q=9.035000,38.758778&z=17&output=embed"
                 width="100%"
-                height="300"
+                height="340"
                 style={{ border: 0, borderRadius: '0.5rem' }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Melody Special Dental Clinic Location"
               />
-              <div className="p-4 pt-2">
+              {/* Mobile-only directions button (only for screens < 570px) */}
+              <div className="p-4 pt-2 block xs:hidden">
                 <Button
                   variant="outline"
                   className="w-full"
