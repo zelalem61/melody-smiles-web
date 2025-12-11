@@ -10,7 +10,7 @@ const VisionValues = () => {
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground">
             To transform oral health in our community by making world-class dental care
-            accessible, comforting, and patient-centered, one smile at a time.
+            accessible.
           </p>
         </div>
 

@@ -20,15 +20,15 @@ const About = () => {
           <Card className="p-8 md:p-12 shadow-[var(--shadow-soft)] border-none bg-card/50 backdrop-blur-sm">
             <div className="space-y-6 text-lg text-card-foreground leading-relaxed">
               <p>
-                Dr. Tinsae Gebrwold is a <span className="font-semibold text-primary">highly skilled and compassionate dental surgeon</span> dedicated to delivering exceptional dental care with a personal touch. With over ten years of experience, she combines clinical excellence with genuine empathy for every patient.
+                Dr. Tinsae Gebrwold is a <span className="font-semibold text-primary">highly skilled and compassionate dental surgeon</span> dedicated to delivering exceptional dental care with a personal touch. With over ten years of experience, she combines clinical excellence with genuine empathy for patients.
               </p>
               
               <p>
-                Her friendly approach helps patients feel comfortable, while her precision ensures top-quality treatment in every procedure.
+                Her friendly approach helps patients feel comfortable, while her precision ensures top-quality treatment.
               </p>
               
               <p>
-                Her vision is to create a <span className="font-semibold text-primary">welcoming environment</span> where smiles are restored, confidence is renewed, and every visit feels positive.
+                We create a <span className="font-semibold text-primary">welcoming environment</span> where smiles are restored, confidence is renewed, and every visit feels positive.
               </p>
               
               <p>
