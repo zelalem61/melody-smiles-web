@@ -1,5 +1,5 @@
+import doctor from "@/assets/doctor.jpg";
 import land1 from "@/assets/land1.jpg";
-import land2 from "@/assets/land2.jpg";
 import land3 from "@/assets/land3.jpg";
 import land4 from "@/assets/land4.jpg";
 import land5 from "@/assets/land5.jpg";
@@ -12,7 +12,7 @@ const Gallery = () => {
       alt: "Dental Clinic",
     },
     {
-      src: land2,
+      src: doctor,
       alt: "Reception Area",
     },
     {
