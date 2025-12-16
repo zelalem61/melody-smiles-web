@@ -1,8 +1,8 @@
+import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import logo from "@/assets/logo.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,6 @@ const Navigation = () => {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
-    { name: "Appointment", href: "/appointment" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -26,6 +25,8 @@ const Navigation = () => {
       } else {
         scrollToSection(href);
       }
+    } else if (href.startsWith("http")) {
+      window.open(href, "_blank", "noopener,noreferrer");
     } else {
       navigate(href);
     }
@@ -68,9 +69,15 @@ const Navigation = () => {
             ))}
             <Button 
               variant="hero"
-              onClick={() => handleNavClick("/appointment")}
+              asChild
             >
-              Book Now
+              <a
+                href="https://calendar.app.google/oNwdRthrwoQ6DidS6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book Now
+              </a>
             </Button>
           </div>
 
@@ -101,9 +108,15 @@ const Navigation = () => {
                 <Button 
                   variant="hero"
                   className="w-full"
-                  onClick={() => handleNavClick("/appointment")}
+                  asChild
                 >
-                  Book Now
+                  <a
+                    href="https://calendar.app.google/oNwdRthrwoQ6DidS6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Book Now
+                  </a>
                 </Button>
               </div>
             </div>

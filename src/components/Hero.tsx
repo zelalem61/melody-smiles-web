@@ -45,9 +45,15 @@ const Hero = () => {
               variant="hero" 
               size="lg"
               className="text-lg"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              asChild
             >
-              Book Appointment
+              <a
+                href="https://calendar.app.google/oNwdRthrwoQ6DidS6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book Appointment
+              </a>
             </Button>
             <Button 
               variant="outline" 
