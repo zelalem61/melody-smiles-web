@@ -30,13 +30,17 @@ const Hero = () => {
             />
           </div>
           
+          {/* Clinic name for SEO and branding */}
+          <p className="text-lg md:text-xl text-primary-foreground/90 mb-2 font-medium drop-shadow-md uppercase tracking-wide">
+            Melody Special Dental Clinic
+          </p>
           {/* Tagline */}
           <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6 drop-shadow-lg">
             Restoring Smiles.<br />Renewing Confidence.
           </h1>
           
           <p className="text-xl md:text-2xl text-primary-foreground/95 mb-12 font-light drop-shadow-md">
-          Expert dental care with Excellency
+          Expert dental clinic in Addis Ababa — cosmetic dentistry, orthodontics &amp; general care
           </p>
           
           {/* CTA Buttons */}
